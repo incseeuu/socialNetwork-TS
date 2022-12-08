@@ -1,0 +1,8 @@
+.nav {
+    grid-area: navbar;
+    background-color: #1d2738;
+}
+
+.menuItems {
+    color: white;
+}
