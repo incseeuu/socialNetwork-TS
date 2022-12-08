@@ -16,7 +16,7 @@ const Navbar = () => {
                 <a href={"#"}>Music</a>
             </div>
             <div className="Nav__settings">
-                <a href={"#"}>Settings</a>
+                <a href={"#"}>Settings!</a>
             </div>
         </nav>
     );
