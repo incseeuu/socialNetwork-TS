@@ -1,8 +1,34 @@
 .nav {
     grid-area: navbar;
     background-color: #1d2738;
+    border-radius: 10px;
 }
 
 .menuItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding-top: 20px;
+    font-family: "Maiandra GD";
+    font-weight: bold;
+    letter-spacing: 3px;
     color: white;
+}
+
+.menuItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 90%;
+    height: 30px;
+    transition: 0.5s ease;
+}
+
+.menuItem:hover {
+    background-color: white;
+    cursor: pointer;
+    color: #1d2738;
 }
