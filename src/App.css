@@ -1,0 +1,35 @@
+.App__item {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "navbar main"
+;
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 10px;
+    margin: 0 auto;
+    width: 1400px;
+}
+
+.Header__item {
+    grid-area: header;
+    background-color: #1d2738;
+}
+
+.Header__logo {
+    width: 50px;
+    height: 50px;
+}
+
+.Nav__item {
+    grid-area: navbar;
+    background-color: #1d2738;
+}
+
+.main__item {
+    grid-area: main;
+    background-color: aqua;
+}
+
+.Footer__item {
+}
