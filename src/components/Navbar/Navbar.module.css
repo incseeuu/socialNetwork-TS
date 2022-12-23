@@ -1,7 +1,9 @@
 .nav {
     grid-area: navbar;
+    height: 508px;
     background-color: #1d2738;
     border-radius: 10px;
+    box-shadow: 10px 5px 5px darkred;
 }
 
 .menuItems {
@@ -10,6 +12,7 @@
     gap: 10px;
     align-items: center;
     padding-top: 20px;
+    margin-bottom: 10px;
     font-family: "Maiandra GD";
     font-weight: bold;
     letter-spacing: 3px;
@@ -20,15 +23,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
     font-size: 14px;
     width: 90%;
     height: 30px;
     transition: 0.5s ease;
 }
 
-.menuItem:hover {
-    background-color: white;
-    cursor: pointer;
+.menuItem a {
+    color: white;
+    text-decoration: none;
+    box-sizing: content-box;
+    width: 100%;
+    padding: 5px;
+    transition: 0.5s ease;
+}
+
+.menuItem a:hover {
     color: #1d2738;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.menuItem:hover {
+    cursor: pointer;
+}
+
+.menuItem .activeUrl {
+    color: darkred;
+    margin-left: 30px;
+    background-color: white;
+    border-radius: 5px;
 }

@@ -11,3 +11,7 @@
     width: 1400px;
 
 }
+
+.app__wrapper-content {
+    grid-area: main;
+}

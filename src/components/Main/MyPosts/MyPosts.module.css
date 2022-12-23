@@ -6,3 +6,9 @@
     padding: 10px;
     border-radius: 10px;
 }
+
+.like {
+    color: red;
+    font-size: small;
+    font-weight: bold;
+}
