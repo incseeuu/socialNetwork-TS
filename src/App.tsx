@@ -11,6 +11,7 @@ import Settings from "./components/Settings/Settings";
 import {BrowserRouter, Route} from "react-router-dom";
 import {RootStateType} from "./state/state";
 
+
 type AppPropsType = {
     AppState: RootStateType
 }
@@ -25,7 +26,7 @@ function App(props: AppPropsType) {
         <BrowserRouter>
             <div className="App__item">
                 <Header/>
-                <Navbar/>
+                <Navbar stateForNavbar={props.AppState.navbarPage}/>
                 <div className={"app__wrapper-content"}>
                     <Route path="/main" render={componentForPropsMain}/>
                     <Route path="/messages" render={componentForPropsMessages}/>

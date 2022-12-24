@@ -1,0 +1,25 @@
+.sidebarContainer {
+    display: flex;
+    margin-top: 50%;
+}
+
+.sidebarItem {
+    margin: 0 5px;
+    padding: 10px 10px;
+    transition: 0.5s;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.sidebarItem:hover {
+    background: white;
+    color: #1d2738;
+    scale: 1.1;
+}
+
+.avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+
+}

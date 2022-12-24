@@ -14,6 +14,12 @@ export type DialogStateType = {
     name: string
 }
 
+export type SidebarStateType = {
+    id: number
+    name: string
+    avatar: string
+}
+
 export type MainPageType = {
     stateForMainPosts: PostsStateType[]
 }
@@ -24,9 +30,14 @@ export type MessagesPageType = {
 
 }
 
+export type NavbarPageType = {
+    sidebar: SidebarStateType[]
+}
+
 export type RootStateType = {
     mainPage: MainPageType
     messagesPage: MessagesPageType
+    navbarPage: NavbarPageType
 }
 
 const state: RootStateType = {
@@ -52,6 +63,25 @@ const state: RootStateType = {
             {id: 4 ,content: 'Hello, i\'m kitty a little bit'},
             {id: 5 ,content: 'Hello, i\'m kitty a little bit'},
             {id: 6 ,content: 'Hello, i\'m kitty a little bit'},
+        ]
+    },
+    navbarPage: {
+        sidebar: [
+            {
+                id: 1,
+                name: 'Peter',
+                avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600'
+            },
+            {
+                id: 2,
+                name: 'John',
+                avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=600'
+            },
+            {
+                id: 3,
+                name: 'Lora',
+                avatar: 'https://images.pexels.com/photos/1382728/pexels-photo-1382728.jpeg?auto=compress&cs=tinysrgb&w=600'
+            },
         ]
     }
 }
