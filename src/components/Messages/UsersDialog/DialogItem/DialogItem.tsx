@@ -1,11 +1,13 @@
 import React from 'react';
 import classes from "../UsersDialog.module.css"
 import {NavLink} from "react-router-dom";
-import {DialogPropsType} from "../../Messages";
 
+type DialogItemType = {
+    name: string
+    id: number
+}
 
-
-export const DialogItem = (props: DialogPropsType) => {
+export const DialogItem = (props: DialogItemType) => {
 
 
 

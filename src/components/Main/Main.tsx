@@ -2,24 +2,20 @@ import React from 'react';
 import classes from './Main.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import Profile from "./Profile/Profile";
+import {PostsStateType} from "../../state/state";
 
-export type PostsPropsType = {
-    message: string
-    likeCount: number
+
+type MainProps = {
+    stateForMainPosts: PostsStateType[]
 }
 
-const stateForAllPosts: PostsPropsType[] = [
-    {message: "Hello, how are you", likeCount: 15},
-    {message: "Hello, I am fine", likeCount: 20},
-]
-
-const Main = () => {
+const Main = (props: MainProps) => {
     return (
         <div className={classes.main}>
             <div className={classes.headerImg}>
             </div>
             <Profile/>
-            <MyPosts state={stateForAllPosts}/>
+            <MyPosts stateForMyPosts={props.stateForMainPosts}/>
 
         </div>
     );

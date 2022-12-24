@@ -1,8 +1,12 @@
 import React from 'react';
 import classes from "../../UsersMessages/UsersMessages.module.css"
-import {MessagesType} from "../../Messages";
 
-export const MessageItem = (props: MessagesType) => {
+type MessagesItemType = {
+    id: number
+    content: string
+}
+
+export const MessageItem = (props: MessagesItemType) => {
     return (
         <div>{props.content}</div>
     )

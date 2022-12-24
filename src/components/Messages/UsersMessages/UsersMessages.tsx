@@ -1,16 +1,17 @@
 import React from 'react';
 import classes from "./UsersMessages.module.css";
 import {MessageItem} from "./MessagesItem/MessageItem";
-import {MessagesType} from "../Messages";
+import {MessagesStateType} from "../../../state/state";
+
 
 type UsersMessagesType = {
-    state: MessagesType[]
+    stateForUsersMessages: MessagesStateType[]
 }
 
 const UsersMessages = (props: UsersMessagesType) => {
 
 
-    const mappingStateDialogsMessages = props.state.map(el => <MessageItem content={el.content}/>)
+    const mappingStateDialogsMessages = props.stateForUsersMessages.map(el => <MessageItem id={el.id} content={el.content}/>)
 
     return (
             <div className={classes.messagesList}>

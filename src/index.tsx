@@ -2,8 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import state from "./state/state";
+
 
 ReactDOM.render(
-    <App />,
-  document.getElementById('root')
+    <App
+        AppState={state}
+    />,
+    document.getElementById('root')
 );

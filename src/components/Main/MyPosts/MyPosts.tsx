@@ -1,15 +1,16 @@
 import React from 'react';
 import classes from "./MyPosts.module.css";
 import NewPosts from "./NewPost/NewPosts";
-import {PostsPropsType} from "../Main";
+import {PostsStateType} from "../../../state/state";
+
 
 type MyPostsType = {
-    state: PostsPropsType[]
+    stateForMyPosts: PostsStateType[]
 }
 
 const MyPosts = (props: MyPostsType) => {
 
-    const mappingStateAllPosts = props.state.map(el => {
+    const mappingStateAllPosts = props.stateForMyPosts.map(el => {
         return (
             <div>
                 <span>{el.message}</span>
