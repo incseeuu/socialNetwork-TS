@@ -1,16 +1,19 @@
+import {v1} from "uuid";
+import {rerenderState} from "../render";
+
 export type PostsStateType = {
-    id: number
+    id: string
     message: string
     likeCount: number
 }
 
 export type MessagesStateType = {
-    id: number
+    id: string
     content: string
 }
 
 export type DialogStateType = {
-    id: number
+    id: string
     name: string
 }
 
@@ -43,26 +46,26 @@ export type RootStateType = {
 const state: RootStateType = {
     mainPage: {
         stateForMainPosts: [
-            {id:1 ,message: "Hello, how are you", likeCount: 15},
-            {id:2 ,message: "Hello, I am fine", likeCount: 20},
+            {id: v1(),message: "Hello, how are you", likeCount: 15},
+            {id: v1() ,message: "Hello, I am fine", likeCount: 20},
         ]
     },
     messagesPage: {
         stateDialogs: [
-            {id: 1, name: 'Igor'},
-            {id: 2, name: 'Vladimir'},
-            {id: 3, name: 'Sergey'},
-            {id: 4, name: 'Maksim'},
-            {id: 5, name: 'Stepan'},
-            {id: 6, name: 'Yosip'},
+            {id: v1(), name: 'Igor'},
+            {id: v1(), name: 'Vladimir'},
+            {id: v1(), name: 'Sergey'},
+            {id: v1(), name: 'Maksim'},
+            {id: v1(), name: 'Stepan'},
+            {id: v1(), name: 'Yosip'},
         ],
         stateMessages: [
-            {id: 1 ,content: 'Hello, i\'m kitty a little bit'},
-            {id: 2 ,content: 'Hello, i\'m kitty a little bit'},
-            {id: 3 ,content: 'Hello, i\'m kitty a little bit'},
-            {id: 4 ,content: 'Hello, i\'m kitty a little bit'},
-            {id: 5 ,content: 'Hello, i\'m kitty a little bit'},
-            {id: 6 ,content: 'Hello, i\'m kitty a little bit'},
+            {id: v1() ,content: 'Hello, i\'m kitty a little bit'},
+            {id: v1() ,content: 'Hello, i\'m kitty a little bit'},
+            {id: v1() ,content: 'Hello, i\'m kitty a little bit'},
+            {id: v1() ,content: 'Hello, i\'m kitty a little bit'},
+            {id: v1() ,content: 'Hello, i\'m kitty a little bit'},
+            {id: v1() ,content: 'Hello, i\'m kitty a little bit'},
         ]
     },
     navbarPage: {
@@ -84,6 +87,12 @@ const state: RootStateType = {
             },
         ]
     }
+}
+
+export const addPostCallBack = (newPostText: string) => {
+    const newPost:PostsStateType = {id: v1() ,message: newPostText, likeCount: 0}
+    state.mainPage.stateForMainPosts.unshift(newPost)
+    rerenderState(state)
 }
 
 export default state

@@ -6,13 +6,14 @@ import {PostsStateType} from "../../../state/state";
 
 type MyPostsType = {
     stateForMyPosts: PostsStateType[]
+    addPostCallBack: (newPostText: string) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
 
     const mappingStateAllPosts = props.stateForMyPosts.map(el => {
         return (
-            <div>
+            <div key={el.id}>
                 <span>{el.message}</span>
                 <span className={classes.like}>{el.likeCount}</span>
             </div>
@@ -26,7 +27,7 @@ const MyPosts = (props: MyPostsType) => {
                 {mappingStateAllPosts}
             </div>
             <div className={classes.newPosts}>New Posts</div>
-            <NewPosts/>
+            <NewPosts addPostCallBack={props.addPostCallBack}/>
         </div>
     );
 };

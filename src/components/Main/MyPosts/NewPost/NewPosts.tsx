@@ -1,15 +1,27 @@
-import React from 'react';
+import React, {MouseEvent} from 'react';
 import classes from "./NewPosts.module.css";
 
+type NewPostsPropsType = {
+    addPostCallBack: (newPostText: string) => void
+}
 
-const NewPosts = () => {
+const NewPosts = (props: NewPostsPropsType) => {
+
+    const postsAddRef = React.createRef<HTMLTextAreaElement>()
+
+    const onClickSendHandler = (e: MouseEvent<HTMLButtonElement>) => {
+        if(postsAddRef.current){
+            props.addPostCallBack(postsAddRef.current.value)
+        }
+    }
+
     return (
         <div>
             <div>
-                <textarea></textarea>
+                <textarea ref={postsAddRef}></textarea>
             </div>
             <div>
-                <button>Send</button>
+                <button onClick={onClickSendHandler}>Send</button>
             </div>
         </div>
     );

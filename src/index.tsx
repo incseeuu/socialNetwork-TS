@@ -1,13 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import {rerenderState} from "./render";
 import state from "./state/state";
 
-
-ReactDOM.render(
-    <App
-        AppState={state}
-    />,
-    document.getElementById('root')
-);
+rerenderState(state)

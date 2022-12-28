@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {MouseEvent} from 'react';
 import classes from "./UsersMessages.module.css";
 import {MessageItem} from "./MessagesItem/MessageItem";
 import {MessagesStateType} from "../../../state/state";
@@ -10,6 +10,11 @@ type UsersMessagesType = {
 
 const UsersMessages = (props: UsersMessagesType) => {
 
+    const messagesSendRef = React.createRef<HTMLTextAreaElement>()
+
+    const onClickSendHandler = (e: MouseEvent<HTMLButtonElement>) => {
+        alert(messagesSendRef.current?.value)
+    }
 
     const mappingStateDialogsMessages = props.stateForUsersMessages.map(el => <MessageItem id={el.id} content={el.content}/>)
 
@@ -17,6 +22,10 @@ const UsersMessages = (props: UsersMessagesType) => {
             <div className={classes.messagesList}>
                 Messages
                 {mappingStateDialogsMessages}
+                <div>
+                    <textarea ref={messagesSendRef}></textarea>
+                    <button onClick={onClickSendHandler}>Send</button>
+                </div>
             </div>
     );
 };

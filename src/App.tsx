@@ -9,18 +9,25 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {BrowserRouter, Route} from "react-router-dom";
-import {RootStateType} from "./state/state";
+import {addPostCallBack, RootStateType} from "./state/state";
 
 
 type AppPropsType = {
     AppState: RootStateType
+    addPostCallBack: (newPostText: string) => void
 }
 
 function App(props: AppPropsType) {
 
-    const componentForPropsMessages = () => <Messages stateForMessages={props.AppState.messagesPage.stateMessages} stateForDialogs={props.AppState.messagesPage.stateDialogs}/>
+    const componentForPropsMessages = () => <Messages
+        stateForMessages={props.AppState.messagesPage.stateMessages}
+        stateForDialogs={props.AppState.messagesPage.stateDialogs}
+    />
 
-    const componentForPropsMain = () => <Main stateForMainPosts={props.AppState.mainPage.stateForMainPosts}/>
+    const componentForPropsMain = () => <Main
+        stateForMainPosts={props.AppState.mainPage.stateForMainPosts}
+        addPostCallBack={props.addPostCallBack}
+    />
 
     return (
         <BrowserRouter>
