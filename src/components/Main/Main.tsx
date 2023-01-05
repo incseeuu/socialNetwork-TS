@@ -7,7 +7,9 @@ import {PostsStateType} from "../../state/state";
 
 type MainProps = {
     stateForMainPosts: PostsStateType[]
-    addPostCallBack: (newPostText: string) => void
+    addPostCallBack: () => void
+    stateForNewPost: string
+    updateNewPostsCallBack: (value: string) => void
 }
 
 const Main = (props: MainProps) => {
@@ -19,6 +21,8 @@ const Main = (props: MainProps) => {
             <MyPosts
                 stateForMyPosts={props.stateForMainPosts}
                 addPostCallBack={props.addPostCallBack}
+                stateForNewPost={props.stateForNewPost}
+                updateNewPostsCallBack={props.updateNewPostsCallBack}
             />
 
         </div>

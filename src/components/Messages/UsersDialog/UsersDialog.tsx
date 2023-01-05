@@ -16,7 +16,6 @@ const UsersDialog = (props: UsersDialogsType) => {
 
     return (
         <div className={classes.dialogsList}>
-            Dialogs
             {mappingDialog}
         </div>
     );

@@ -1,32 +1,59 @@
 import React, {MouseEvent} from 'react';
 import classes from "./UsersMessages.module.css";
-import {MessageItem} from "./MessagesItem/MessageItem";
 import {MessagesStateType} from "../../../state/state";
+import FriendMessageItem from "./MessagesItem/FriendMessageItem/FriendMessageItem";
+import { SelfMessageItem } from './MessagesItem/SelfMessageItem/SelfMessageItem';
 
 
 type UsersMessagesType = {
     stateForUsersMessages: MessagesStateType[]
+    newMessage: string
+    addNewMessage: () => void
+    updateNewMessageCallBack: (value: string) => void
 }
 
 const UsersMessages = (props: UsersMessagesType) => {
 
     const messagesSendRef = React.createRef<HTMLTextAreaElement>()
 
-    const onClickSendHandler = (e: MouseEvent<HTMLButtonElement>) => {
-        alert(messagesSendRef.current?.value)
+    const onClickSendHandler = () => {
+        props.addNewMessage()
     }
 
-    const mappingStateDialogsMessages = props.stateForUsersMessages.map(el => <MessageItem id={el.id} content={el.content}/>)
+    const updateNewMessageCallBack = () => {
+        if(messagesSendRef.current){
+            props.updateNewMessageCallBack(messagesSendRef.current.value)
+        }
+    }
+
+    const mappingStateDialogsMessages =
+        props.stateForUsersMessages.map(el => {
+            return (
+                <div className={classes.messageContainer}>
+                    <SelfMessageItem id={el.id} content={el.content}/>
+                </div>
+            )
+        })
 
     return (
-            <div className={classes.messagesList}>
-                Messages
+        <div className={classes.messagesList}>
+            <div className={classes.chatContainer}>
+                <FriendMessageItem />
                 {mappingStateDialogsMessages}
-                <div>
-                    <textarea ref={messagesSendRef}></textarea>
-                    <button onClick={onClickSendHandler}>Send</button>
-                </div>
+                <FriendMessageItem />
             </div>
+
+            <div className={classes.sendForm}>
+                <textarea
+                    value={props.newMessage}
+                    onChange={updateNewMessageCallBack}
+                    className={classes.textarea}
+                    placeholder={'Write message...'}
+                    ref={messagesSendRef}
+                />
+                <button className={classes.sendBtn} onClick={onClickSendHandler}>Send</button>
+            </div>
+        </div>
     );
 };
 

@@ -1,0 +1,10 @@
+.mainContainer {
+    align-self: end;
+    max-width: 300px;
+    background-color: #1d2738;
+    margin: 10px;
+    text-align: right;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}

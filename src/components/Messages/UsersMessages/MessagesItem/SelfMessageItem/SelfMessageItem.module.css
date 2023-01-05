@@ -1,0 +1,9 @@
+.mainContainer {
+    align-self: start;
+    max-width: 300px;
+    background-color: #47557c;
+    text-align: left;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
