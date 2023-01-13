@@ -1,10 +1,11 @@
 import React, {MouseEvent} from 'react';
 import classes from "./NewPosts.module.css";
+import {ActionsType} from "../../../../state/state";
+import {addPostAC, updateNewPostTextAC} from "../../../../state/mainPage-reducer";
 
 type NewPostsPropsType = {
-    addPostCallBack: () => void
     stateForNewPost: string
-    updateNewPostsCallBack: (value: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 const NewPosts = (props: NewPostsPropsType) => {
@@ -12,14 +13,13 @@ const NewPosts = (props: NewPostsPropsType) => {
     const postsAddRef = React.createRef<HTMLTextAreaElement>()
 
     const onClickSendHandler = () => {
-            props.addPostCallBack()
+            props.dispatch(addPostAC())
 
     }
 
     const updateNewPostsCallBack = () => {
-        debugger
         if (postsAddRef.current) {
-            props.updateNewPostsCallBack(postsAddRef.current.value)
+            props.dispatch(updateNewPostTextAC(postsAddRef.current.value))
         }
     }
 

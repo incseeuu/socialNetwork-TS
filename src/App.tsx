@@ -9,15 +9,12 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {Route} from "react-router-dom";
-import {StateType} from "./state/state";
+import {ActionsType, StateType} from "./state/state";
 
 
 type AppPropsType = {
     AppState: StateType
-    addNewMessages: () => void
-    updateNewMessageCallBack: (value: string) => void
-    addPostCallBack: () => void
-    updateNewPostsCallBack: (value: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 function App(props: AppPropsType) {
@@ -25,16 +22,14 @@ function App(props: AppPropsType) {
     const componentForPropsMessages = () => <Messages
         stateForMessages={props.AppState.messagesPage.stateMessages}
         stateForDialogs={props.AppState.messagesPage.stateDialogs}
-        addNewMessages={props.addNewMessages}
         newMessage={props.AppState.messagesPage.newMessage}
-        updateNewMessageCallBack={props.updateNewMessageCallBack}
+        dispatch={props.dispatch}
     />
 
     const componentForPropsMain = () => <Main
         stateForMainPosts={props.AppState.mainPage.stateForMainPosts}
         stateForNewPost={props.AppState.mainPage.newPosts}
-        addPostCallBack={props.addPostCallBack}
-        updateNewPostsCallBack={props.updateNewPostsCallBack}
+        dispatch={props.dispatch}
     />
 
     return (

@@ -1,15 +1,18 @@
 import React, {MouseEvent} from 'react';
 import classes from "./UsersMessages.module.css";
-import {MessagesStateType} from "../../../state/state";
+import {
+    ActionsType,
+    MessagesStateType,
+} from "../../../state/state";
 import FriendMessageItem from "./MessagesItem/FriendMessageItem/FriendMessageItem";
-import { SelfMessageItem } from './MessagesItem/SelfMessageItem/SelfMessageItem';
+import {SelfMessageItem} from './MessagesItem/SelfMessageItem/SelfMessageItem';
+import {addMessageActionCreator, updateMessageTextActionCreator} from "../../../state/messagesPage-reducer";
 
 
 type UsersMessagesType = {
     stateForUsersMessages: MessagesStateType[]
     newMessage: string
-    addNewMessage: () => void
-    updateNewMessageCallBack: (value: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 const UsersMessages = (props: UsersMessagesType) => {
@@ -17,12 +20,12 @@ const UsersMessages = (props: UsersMessagesType) => {
     const messagesSendRef = React.createRef<HTMLTextAreaElement>()
 
     const onClickSendHandler = () => {
-        props.addNewMessage()
+        props.dispatch(addMessageActionCreator())
     }
 
     const updateNewMessageCallBack = () => {
-        if(messagesSendRef.current){
-            props.updateNewMessageCallBack(messagesSendRef.current.value)
+        if (messagesSendRef.current) {
+            props.dispatch(updateMessageTextActionCreator(messagesSendRef.current.value))
         }
     }
 
@@ -38,9 +41,9 @@ const UsersMessages = (props: UsersMessagesType) => {
     return (
         <div className={classes.messagesList}>
             <div className={classes.chatContainer}>
-                <FriendMessageItem />
+                <FriendMessageItem/>
                 {mappingStateDialogsMessages}
-                <FriendMessageItem />
+                <FriendMessageItem/>
             </div>
 
             <div className={classes.sendForm}>

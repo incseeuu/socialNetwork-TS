@@ -1,14 +1,13 @@
 import React from 'react';
 import classes from "./MyPosts.module.css";
 import NewPosts from "./NewPost/NewPosts";
-import {PostsStateType} from "../../../state/state";
+import {ActionsType, PostsStateType} from "../../../state/state";
 
 
 type MyPostsType = {
     stateForMyPosts: PostsStateType[]
-    addPostCallBack: () => void
     stateForNewPost: string
-    updateNewPostsCallBack: (value:string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
@@ -30,9 +29,8 @@ const MyPosts = (props: MyPostsType) => {
             </div>
             <div className={classes.newPosts}>New Posts</div>
             <NewPosts
-                addPostCallBack={props.addPostCallBack}
                 stateForNewPost={props.stateForNewPost}
-                updateNewPostsCallBack={props.updateNewPostsCallBack}
+                dispatch={props.dispatch}
             />
         </div>
     );

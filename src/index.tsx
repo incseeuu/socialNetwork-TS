@@ -11,10 +11,7 @@ const rerenderState = () => {
         <BrowserRouter>
             <App
                 AppState={store.getState()}
-                addNewMessages={store.addNewMessages.bind(store)}
-                updateNewMessageCallBack={store.updateNewMessageCallBack.bind(store)}
-                addPostCallBack={store.addPostCallBack.bind(store)}
-                updateNewPostsCallBack={store.addPostCallBack.bind(store)}
+                dispatch={store.dispatch.bind(store)}
             />
         </BrowserRouter>,
         document.getElementById('root')
