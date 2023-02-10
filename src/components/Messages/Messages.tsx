@@ -1,8 +1,9 @@
 import React from 'react';
 import classes from "./Messages.module.css"
-import UsersMessages from "./UsersMessages/UsersMessages";
 import UsersDialog from "./UsersDialog/UsersDialog";
-import {ActionsType, DialogStateType, MessagesStateType} from "../../state/state";
+import {ActionsType, DialogStateType, MessagesStateType} from "../../state/store";
+import UsersMessagesContainer from "./UsersMessages/UsersMessagesContainer";
+
 
 type MessagesType = {
     stateForMessages: MessagesStateType[]
@@ -15,11 +16,7 @@ const Messages = (props: MessagesType) => {
     return (
         <div className={classes.mainMessages} >
             <UsersDialog stateForUsersDialog={props.stateForDialogs}/>
-            <UsersMessages
-                stateForUsersMessages={props.stateForMessages}
-                newMessage={props.newMessage}
-                dispatch={props.dispatch}
-            />
+            <UsersMessagesContainer />
         </div>
     );
 };

@@ -1,11 +1,11 @@
-import React, {MouseEvent} from 'react';
-import classes from "./NewPosts.module.css";
-import {ActionsType} from "../../../../state/state";
-import {addPostAC, updateNewPostTextAC} from "../../../../state/mainPage-reducer";
+import React from 'react';
+import {MainPageType} from "../../../../state/mainPage-reducer";
+
 
 type NewPostsPropsType = {
-    stateForNewPost: string
-    dispatch: (action: ActionsType) => void
+    stateForNewPost: MainPageType
+    changeNewPostsText: (value: string) => void
+    addNewPost: () => void
 }
 
 const NewPosts = (props: NewPostsPropsType) => {
@@ -13,23 +13,31 @@ const NewPosts = (props: NewPostsPropsType) => {
     const postsAddRef = React.createRef<HTMLTextAreaElement>()
 
     const onClickSendHandler = () => {
-            props.dispatch(addPostAC())
+            props.addNewPost()
 
     }
 
-    const updateNewPostsCallBack = () => {
-        if (postsAddRef.current) {
-            props.dispatch(updateNewPostTextAC(postsAddRef.current.value))
-        }
+    const onChangeNewPostsText = () => {
+        postsAddRef.current && props.changeNewPostsText(postsAddRef.current.value)
     }
+
+    const mappingStateAllPosts = props.stateForNewPost.stateForMainPosts.map(el => {
+            return (
+                <div key={el.id}>
+                    <span>{el.message}</span>
+                    <span >{el.likeCount}</span>
+                </div>
+            )
+        })
 
     return (
         <div>
+            {mappingStateAllPosts}
             <div>
                 <textarea
-                    onChange={updateNewPostsCallBack}
+                    onChange={onChangeNewPostsText}
                     ref={postsAddRef}
-                    value={props.stateForNewPost}/>
+                    value={props.stateForNewPost.newPosts}/>
             </div>
             <div>
                 <button onClick={onClickSendHandler}>Send</button>

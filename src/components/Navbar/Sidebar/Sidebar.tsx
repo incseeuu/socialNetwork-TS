@@ -1,5 +1,5 @@
 import React from 'react';
-import {SidebarStateType} from "../../../state/state";
+import {SidebarStateType} from "../../../state/store";
 import classes from "./Sidebar.module.css"
 
 type SidebarType = {
@@ -10,7 +10,7 @@ const Sidebar = (props: SidebarType) => {
 
     const mappingSidebar = props.stateForSidebar.map(el => {
         return(
-            <div className={classes.sidebarItem}>
+            <div key={el.id} className={classes.sidebarItem}>
                 <img className={classes.avatar} src={el.avatar}/>
                 <div>{el.name}</div>
             </div>

@@ -121,29 +121,12 @@ export const store: StoreType = {
     },
     dispatch(action) {
 
-        this._state.mainPage = mainPageReducer(this._state.mainPage, action)
-
-        this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
+        // this._state.mainPage = mainPageReducer(this._state.mainPage, action)
+        //
+        // this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
 
         this._state.navbarPage = navbarPageReducer(this._state.navbarPage, action)
 
-        // if (action.type === 'ADD-POST') {
-        //     const newPost: PostsStateType = {id: v1(), message: this._state.mainPage.newPosts, likeCount: 0}
-        //     this._state.mainPage.stateForMainPosts.unshift(newPost)
-        //     this._state.mainPage.newPosts = ''
-        //     this._callSubscribe()
-        // } else if (action.type === 'NEW-POST-TEXT') {
-        //     this._state.mainPage.newPosts = action.value
-        //     this._callSubscribe()
-        // } else if (action.type === 'ADD-MESSAGE') {
-        //     let newMessage: MessagesStateType = {id: v1(), content: this._state.messagesPage.newMessage}
-        //     this._state.messagesPage.stateMessages.push(newMessage)
-        //     this._state.messagesPage.newMessage = ''
-        //     this._callSubscribe()
-        // } else if (action.type === "UPDATE-TEXT-MESSAGES") {
-        //     this._state.messagesPage.newMessage = action.value
-        //     this._callSubscribe()
-        // }
         this._callSubscribe()
     }
 }

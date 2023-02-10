@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from "./UsersDialog.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogStateType} from "../../../state/state";
+import {DialogStateType} from "../../../state/store";
 
 
 

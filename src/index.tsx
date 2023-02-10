@@ -1,23 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {store} from "./state/state";
+import store from "./state/redux-store";
 import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 
 
-const rerenderState = () => {
-    ReactDOM.render(
-        <BrowserRouter>
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
             <App
                 AppState={store.getState()}
                 dispatch={store.dispatch.bind(store)}
             />
-        </BrowserRouter>,
-        document.getElementById('root')
-    );
-}
-
-rerenderState()
-
-store.subscribe(rerenderState)
+        </Provider>
+    </BrowserRouter>,
+    document.getElementById('root')
+);

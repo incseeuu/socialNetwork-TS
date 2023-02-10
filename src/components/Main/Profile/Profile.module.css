@@ -6,8 +6,6 @@
 
 .avatarImg {
     margin: 10px;
-    background-image: url("../../../Img/avatar.png");
-    background-size: cover;
     width: 150px;
     height:150px;
     background-color: black;
@@ -15,12 +13,54 @@
     box-shadow: 10px 5px 5px #1d2738;
 }
 
-.description {
-    flex-basis: 50%;
-    margin: 35px 10px;
+.nameAndAboutMe {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 80%;
+    height:150px;
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+.name {
+    width: 40%;
     padding: 10px;
     border-radius: 10px;
     background-color: white;
     box-shadow: 10px 5px 5px #1d2738;
-    height: 100px;
+    margin-bottom: 20px;
+}
+
+.lookingJob {
+    padding: 10px;
+    margin-left: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 10px 5px 5px #1d2738;
+    width: 40%;
+
+}
+
+.lookingText {
+    opacity: 0.5;
+}
+
+.jobDescription {
+    padding: 10px;
+    margin-left: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 10px 5px 5px #1d2738;
+    width: 40%;
+    height: 40%;
+}
+
+.description {
+    padding: 10px;
+    width: 40%;
+    height: 40%;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 10px 5px 5px #1d2738;
 }

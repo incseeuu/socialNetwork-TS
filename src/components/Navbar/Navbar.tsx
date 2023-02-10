@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
-import {NavbarPageType} from "../../state/state";
+import {NavbarPageType} from "../../state/store";
 
 type NavbarType = {
     stateForNavbar: NavbarPageType
@@ -27,7 +27,11 @@ const Navbar = (props: NavbarType) => {
                 <div className={`${classes.itemSettings} ${classes.menuItem}`}>
                     <NavLink to="/settings" activeClassName={classes.activeUrl}>Settings</NavLink>
                 </div>
+                <div className={`${classes.itemSettings} ${classes.menuItem}`}>
+                    <NavLink to="/people" activeClassName={classes.activeUrl}>People</NavLink>
+                </div>
                 <Sidebar stateForSidebar={props.stateForNavbar.sidebar}/>
+
             </div>
         </nav>
     );
