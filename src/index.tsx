@@ -18,3 +18,7 @@ ReactDOM.render(
     </BrowserRouter>,
     document.getElementById('root')
 );
+
+
+// @ts-ignore
+window.store = store;

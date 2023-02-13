@@ -38,7 +38,7 @@ function App(props: AppPropsType) {
             <Header/>
             <Navbar stateForNavbar={props.AppState.navbarPage}/>
             <div className={"app__wrapper-content"}>
-                <Route path="/main" render={() => <Main />}/>
+                <Route path="/main/:userId" render={() => <Main />}/>
                 <Route path="/messages" render={componentForPropsMessages}/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
