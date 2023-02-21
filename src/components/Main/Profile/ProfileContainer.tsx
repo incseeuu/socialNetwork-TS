@@ -17,14 +17,15 @@ type ParamType = {
 
 class ProfileC extends React.Component<WithRouterTypeProps> {
     componentDidMount() {
-        let getUserIdFromUrl = this.props.match.params.userId
-
+        let getUserIdFromUrl = +this.props.match.params.userId
+        if(!getUserIdFromUrl){
+            getUserIdFromUrl = 27956
+        }
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${getUserIdFromUrl}`)
             // .then(res => this.props.setProfile(res.data))
             .then(res => {
                 this.props.setProfile(res.data)
             })
-        console.log(this.props)
     }
 
     render() {

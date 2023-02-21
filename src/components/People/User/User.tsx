@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './User.module.css'
 import {GetUsersType} from "../../../state/peoplePage-reducer";
 import {NavLink} from "react-router-dom";
+import {userApi} from "../../../api/api";
 
 type PropsType = {
     state: GetUsersType[]
@@ -11,10 +12,30 @@ type PropsType = {
     totalCount: number
     pageSize: number
     currentPage: number
+    setDisableBtn: (userId: number,value: boolean) => void
+    isDisabledFollowBtn: number[] | []
 }
 
 const User: React.FC<PropsType> = (props: PropsType) => {
 
+    const onClickUnfollowHandler = (userId: number) => {
+        props.setDisableBtn(userId,true)
+        userApi.unFollow(userId).then(res => {
+            if (res.data.resultCode === 0) {
+                props.deleteFriend(userId)
+            }
+            props.setDisableBtn(userId,false)
+        })
+    }
+    const onClickFollowHandler = (userId: number) => {
+        props.setDisableBtn(userId,true)
+        userApi.follow(userId).then(res => {
+            if (res.data.resultCode === 0) {
+                props.addToFriend(userId)
+            }
+            props.setDisableBtn(userId,false)
+        })
+    }
 
     const mappingUserCard = props.state.map(el => {
         return (
@@ -27,8 +48,16 @@ const User: React.FC<PropsType> = (props: PropsType) => {
                 </NavLink>
                 <div>
                     {el.followed
-                        ? <button onClick={() => {props.deleteFriend(el.id)}} >unfollow</button>
-                        : <button onClick={() => {props.addToFriend(el.id)}} >follow</button>}
+                        ? <button onClick={() => {
+                            onClickUnfollowHandler(el.id)
+                        }}
+                                  disabled={props.isDisabledFollowBtn.some(s => s === el.id)}
+                        >unfollow</button>
+                        : <button onClick={() => {
+                            onClickFollowHandler(el.id)
+                        }}
+                                  disabled={props.isDisabledFollowBtn.some(s => s === el.id)}
+                        >follow</button>}
                 </div>
                 <div>
                     <div>
@@ -46,25 +75,25 @@ const User: React.FC<PropsType> = (props: PropsType) => {
     // let countPages = Math.ceil(props.totalCount / props.pageSize)
     let countPages = Math.ceil(100 / props.pageSize)
     let pages = []
-    for(let i = 1; i <= countPages; i++){
+    for (let i = 1; i <= countPages; i++) {
         pages.push(i)
     }
 
     return (
+        <div>
             <div>
-                <div>
-                    {pages.map((el, index) => {
-                        return (
-                            <span key={index}
-                                className={props.currentPage === el ? classes.currentPage : ''}
-                                onClick={() => props.onClickSetCurrentPageCallback(el)}
+                {pages.map((el, index) => {
+                    return (
+                        <span key={index}
+                              className={props.currentPage === el ? classes.currentPage : ''}
+                              onClick={() => props.onClickSetCurrentPageCallback(el)}
 
-                            >{el}</span>
-                        )
-                    })}
-                </div>
-                {mappingUserCard}
+                        >{el}</span>
+                    )
+                })}
             </div>
+            {mappingUserCard}
+        </div>
     );
 }
 

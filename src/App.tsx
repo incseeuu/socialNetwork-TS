@@ -12,6 +12,8 @@ import {Route} from "react-router-dom";
 import {ActionsType, MainPageType, MessagesPageType, NavbarPageType, StateType} from "./state/store";
 import {AppStateType} from "./state/redux-store";
 import People from "./components/People/People";
+import HeaderC from './components/Header/HeaderContainer';
+import {HeaderContainer} from "./components/Header/HeaderContainer";
 
 type AppPropsType = {
     AppState: AppStateType
@@ -35,10 +37,10 @@ function App(props: AppPropsType) {
 
     return (
         <div className="App__item">
-            <Header/>
+            <HeaderContainer/>
             <Navbar stateForNavbar={props.AppState.navbarPage}/>
             <div className={"app__wrapper-content"}>
-                <Route path="/main/:userId" render={() => <Main />}/>
+                <Route path="/main/:userId?" render={() => <Main />}/>
                 <Route path="/messages" render={componentForPropsMessages}/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>

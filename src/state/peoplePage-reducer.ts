@@ -1,9 +1,12 @@
+
+
 type PeoplePageACType = AddFriendACType
     | DeleteFriendACType
     | SetUsersAC
     | SetTotalCountAC
     | SetCurrentPage
     | SetLoader
+    | SetDisabledFollowBtnAC
 
 type AddFriendACType = ReturnType<typeof addFriendAC>
 type DeleteFriendACType = ReturnType<typeof deleteFriendAC>
@@ -11,13 +14,15 @@ type SetUsersAC = ReturnType<typeof setUsersAC>
 type SetTotalCountAC = ReturnType<typeof setTotalCountAC>
 type SetCurrentPage = ReturnType<typeof setCurrentPageAC>
 type SetLoader = ReturnType<typeof setLoaderAC>
+type SetDisabledFollowBtnAC = ReturnType<typeof setDisabledFollowBtnAC>
 
 export type PeopleStateType = {
-    items: GetUsersType[] | null
+    items: GetUsersType[]
     totalCount: number
     pageSize: number
     currentPage: number
-    loader: boolean
+    isFetching: boolean
+    isDisabledFollowBtn: number[] | []
 }
 
 export type GetUsersType = {
@@ -39,18 +44,19 @@ const initialState: PeopleStateType = {
     totalCount: 0,
     pageSize: 5,
     currentPage: 1,
-    loader: true
+    isFetching: true,
+    isDisabledFollowBtn: []
 }
 
 const peoplePageReducer = (state = initialState, action: PeoplePageACType) => {
     switch (action.type) {
         case "ADD-FRIEND":
-            return {...state, items: state.items?.map(el => el.id === action.payload.userId
-                    ? {...el, friend: true}
+            return {...state, items: state.items.map(el => el.id === action.payload.userId
+                    ? {...el, followed: true}
                     : el)}
         case "DELETE-FRIEND":
-            return {...state, items: state.items?.map(el => el.id === action.payload.userId
-                    ? {...el, friend: false}
+            return {...state, items: state.items.map(el => el.id === action.payload.userId
+                    ? {...el, followed: false}
                     : el)}
         case "SET-USERS":
             return {...state, items: action.payload.items}
@@ -59,7 +65,12 @@ const peoplePageReducer = (state = initialState, action: PeoplePageACType) => {
         case "SET-CURRENT-PAGE":
             return {...state, currentPage: action.payload.page}
         case "SET-LOADER":
-            return  {...state, loader: action.payload.value}
+            return  {...state, isFetching: action.payload.value}
+        case "SET-DISABLE-BTN":
+            return  {...state, isDisabledFollowBtn: action.payload.value
+                    ? [...state.isDisabledFollowBtn, action.payload.userId]
+                    : state.isDisabledFollowBtn.filter(el => el !== action.payload.userId)
+            }
     }
     return state
 }
@@ -113,6 +124,16 @@ export const setLoaderAC = (value: boolean) => {
     return {
         type: 'SET-LOADER',
         payload: {
+            value
+        }
+    } as const
+}
+
+export const setDisabledFollowBtnAC = (userId: number,value: boolean) => {
+    return {
+        type: 'SET-DISABLE-BTN',
+        payload: {
+            userId,
             value
         }
     } as const

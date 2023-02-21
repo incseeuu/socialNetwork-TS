@@ -7,6 +7,10 @@
     border-radius: 10px;
     box-shadow: 10px 5px 5px darkred;
 }
+.header div a {
+    position: absolute;
+    color: white;
+}
 
 .headerLogo {
     background-image: url("../../Img/headerLogo.png");
