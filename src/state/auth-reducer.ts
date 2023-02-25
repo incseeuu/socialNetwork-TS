@@ -1,7 +1,10 @@
+import {Dispatch} from "redux";
+import {headerApi} from "../api/api";
+
 type ActionsType = SetAuthStateAC | SetFetchingAC
 
-type SetAuthStateAC = ReturnType<typeof setAuthStateAC>
-type SetFetchingAC = ReturnType<typeof setFetchingAC>
+type SetAuthStateAC = ReturnType<typeof setAuthState>
+type SetFetchingAC = ReturnType<typeof setFetching>
 export type AuthStateType = {
     id: string | null
     email: string | null
@@ -28,7 +31,7 @@ export const authReducer = (state = initialState, action: ActionsType) => {
     return state
 }
 
-export const setAuthStateAC = (authState: AuthStateType) => {
+export const setAuthState = (authState: AuthStateType) => {
     return {
         type: 'SET-AUTH-STATE',
         payload: {
@@ -37,11 +40,23 @@ export const setAuthStateAC = (authState: AuthStateType) => {
     } as const
 }
 
-export const setFetchingAC = (value: boolean) => {
+export const setFetching = (value: boolean) => {
     return {
         type: 'SET-FETCHING',
         payload: {
             value
         }
     } as const
+}
+
+export const authMeThunk = (dispatch: Dispatch) => {
+    dispatch(setFetching(true))
+
+
+    headerApi.authMe().then(res => {
+        if (res.data.resultCode === 0){
+            dispatch(setAuthState(res.data.data))
+        }
+        dispatch(setFetching(false))
+    })
 }

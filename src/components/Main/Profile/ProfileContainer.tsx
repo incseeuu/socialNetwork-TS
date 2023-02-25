@@ -1,15 +1,16 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {AppStateType} from "../../../state/redux-store";
-import {Dispatch} from "redux";
-import axios from "axios";
-import {GetProfileType, setProfileAC} from "../../../state/mainPage-reducer";
+import {GetProfileType, userFromUrlThunk} from "../../../state/mainPage-reducer";
 import Profile from "./Profile";
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 
-type WithRouterTypeProps = RouteComponentProps<ParamType> & PropsType
 
-type PropsType = MapStateToProps & MapDispatchToProps
+type WithRouterTypeProps = RouteComponentProps<ParamType> & PropsType & MapStateToProps
+
+type PropsType ={
+    userFromUrlThunk: (getUserIdFromUrl: number) => void
+}
 
 type ParamType = {
     userId: string
@@ -21,11 +22,7 @@ class ProfileC extends React.Component<WithRouterTypeProps> {
         if(!getUserIdFromUrl){
             getUserIdFromUrl = 27956
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${getUserIdFromUrl}`)
-            // .then(res => this.props.setProfile(res.data))
-            .then(res => {
-                this.props.setProfile(res.data)
-            })
+            this.props.userFromUrlThunk(getUserIdFromUrl)
     }
 
     render() {
@@ -37,9 +34,7 @@ type MapStateToProps = {
     stateForProfile: GetProfileType
 }
 
-type MapDispatchToProps = {
-    setProfile: (profile: GetProfileType) => void
-}
+
 
 const mapStateToProps = (state: AppStateType): MapStateToProps => {
     let {mainPage} = state
@@ -49,14 +44,10 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-    return {
-        setProfile: (profile: GetProfileType) => dispatch(setProfileAC(profile)),
-    }
-}
+
 
 let WithUrlContainerComponent = withRouter(ProfileC)
 
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(WithUrlContainerComponent)
+const ProfileContainer = connect(mapStateToProps, {userFromUrlThunk})(WithUrlContainerComponent)
 
 export default ProfileContainer;

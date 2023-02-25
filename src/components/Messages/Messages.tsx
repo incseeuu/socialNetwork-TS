@@ -10,9 +10,11 @@ type MessagesType = {
     stateForDialogs: DialogStateType[]
     newMessage: string
     dispatch: (action: ActionsType) => void
+
 }
 
 const Messages = (props: MessagesType) => {
+
     return (
         <div className={classes.mainMessages} >
             <UsersDialog stateForUsersDialog={props.stateForDialogs}/>

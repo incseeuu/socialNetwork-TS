@@ -1,3 +1,5 @@
+import {userApi} from "../api/api";
+import {Dispatch} from "redux";
 
 
 type PeoplePageACType = AddFriendACType
@@ -137,6 +139,39 @@ export const setDisabledFollowBtnAC = (userId: number,value: boolean) => {
             value
         }
     } as const
+}
+
+export const getUserThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setLoaderAC(true))
+
+        userApi.getUser(currentPage, pageSize)
+            .then(data => {
+
+                dispatch(setUsersAC(data.items))
+                dispatch(setTotalCountAC(data.totalCount))
+                dispatch(setLoaderAC(false))
+            })
+}}
+
+export const followThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(setDisabledFollowBtnAC(userId,true))
+    userApi.unFollow(userId).then(res => {
+        if (res.data.resultCode === 0) {
+            dispatch(deleteFriendAC(userId))
+        }
+        dispatch(setDisabledFollowBtnAC(userId,false))
+    })
+}
+
+export const unFollowThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(setDisabledFollowBtnAC(userId,true))
+    userApi.follow(userId).then(res => {
+        if (res.data.resultCode === 0) {
+            dispatch(addFriendAC(userId))
+        }
+        dispatch(setDisabledFollowBtnAC(userId,false))
+    })
 }
 
 export default peoplePageReducer;

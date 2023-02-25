@@ -1,15 +1,16 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import mainPageReducer from "./mainPage-reducer";
 import messagesPageReducer from "./messagesPage-reducer";
 import navbarPageReducer from "./navbarPage-reducer";
 import peoplePageReducer from "./peoplePage-reducer";
 import {authReducer} from "./auth-reducer";
+import thunkMiddleware from "redux-thunk";
 
 
-export type AppStateType = ReturnType<typeof mainReducer>
+export type AppStateType = ReturnType<typeof rootReducer>
 
 
-const mainReducer = combineReducers({
+const rootReducer = combineReducers({
     mainPage: mainPageReducer,
     messagePage: messagesPageReducer,
     navbarPage: navbarPageReducer,
@@ -17,7 +18,7 @@ const mainReducer = combineReducers({
     auth: authReducer
 });
 
-const store = createStore(mainReducer)
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 
 export default store;

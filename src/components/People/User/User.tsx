@@ -2,39 +2,25 @@ import React from 'react';
 import classes from './User.module.css'
 import {GetUsersType} from "../../../state/peoplePage-reducer";
 import {NavLink} from "react-router-dom";
-import {userApi} from "../../../api/api";
 
 type PropsType = {
     state: GetUsersType[]
-    addToFriend: (userId: number) => void
-    deleteFriend: (userId: number) => void
     onClickSetCurrentPageCallback: (el: number) => void
     totalCount: number
     pageSize: number
     currentPage: number
-    setDisableBtn: (userId: number,value: boolean) => void
     isDisabledFollowBtn: number[] | []
+    followThunkCreator: (userId: number) => void
+    unFollowThunkCreator: (userId: number) => void
 }
 
 const User: React.FC<PropsType> = (props: PropsType) => {
 
     const onClickUnfollowHandler = (userId: number) => {
-        props.setDisableBtn(userId,true)
-        userApi.unFollow(userId).then(res => {
-            if (res.data.resultCode === 0) {
-                props.deleteFriend(userId)
-            }
-            props.setDisableBtn(userId,false)
-        })
+        props.followThunkCreator(userId)
     }
     const onClickFollowHandler = (userId: number) => {
-        props.setDisableBtn(userId,true)
-        userApi.follow(userId).then(res => {
-            if (res.data.resultCode === 0) {
-                props.addToFriend(userId)
-            }
-            props.setDisableBtn(userId,false)
-        })
+        props.unFollowThunkCreator(userId)
     }
 
     const mappingUserCard = props.state.map(el => {
@@ -72,7 +58,6 @@ const User: React.FC<PropsType> = (props: PropsType) => {
         )
     })
 
-    // let countPages = Math.ceil(props.totalCount / props.pageSize)
     let countPages = Math.ceil(100 / props.pageSize)
     let pages = []
     for (let i = 1; i <= countPages; i++) {

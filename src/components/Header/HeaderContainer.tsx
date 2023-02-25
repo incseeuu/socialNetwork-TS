@@ -1,35 +1,22 @@
 import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
-import {AuthStateType, setAuthStateAC, setFetchingAC} from "../../state/auth-reducer";
+import {authMeThunk} from "../../state/auth-reducer";
 import {AppStateType} from "../../state/redux-store";
-import axios from "axios";
+
 
 type PropsType = {
     id: string | null
     email: string | null
     login: string | null
     isFetching: boolean
-    setState: (authState: AuthStateType) => void
-    setFetching: (value: boolean) => void
+    authMeThunk: () => void
 }
 
 class HeaderC extends React.Component<PropsType> {
 
     componentDidMount() {
-
-        this.props.setFetching(true)
-
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {
-            withCredentials: true
-        })
-            .then(res => {
-                if (res.data.resultCode === 0){
-                    this.props.setState(res.data.data)
-                }
-                this.props.setFetching(false)
-            })
+        this.props.authMeThunk()
     }
 
     render() {
@@ -38,12 +25,6 @@ class HeaderC extends React.Component<PropsType> {
 }
 
 export default HeaderC
-
-
-type MapDispatchToProps = {
-    setState: (authState: AuthStateType) => void
-    setFetching: (value: boolean) => void
-}
 
 type MapStateToProps = {
     id: string | null
@@ -64,12 +45,9 @@ const mapStateToProps = (state: AppStateType):MapStateToProps => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-    return {
-        setState: (authState: AuthStateType) => dispatch(setAuthStateAC(authState)),
-        setFetching: (value: boolean) => dispatch(setFetchingAC(value))
-    }
-}
 
-export const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(HeaderC)
+
+export const HeaderContainer = connect(
+    mapStateToProps,
+    {authMeThunk: () => authMeThunk})(HeaderC)
 

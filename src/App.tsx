@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
@@ -9,11 +8,11 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {Route} from "react-router-dom";
-import {ActionsType, MainPageType, MessagesPageType, NavbarPageType, StateType} from "./state/store";
+import {ActionsType} from "./state/store";
 import {AppStateType} from "./state/redux-store";
 import People from "./components/People/People";
-import HeaderC from './components/Header/HeaderContainer';
 import {HeaderContainer} from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 type AppPropsType = {
     AppState: AppStateType
@@ -29,11 +28,6 @@ function App(props: AppPropsType) {
         dispatch={props.dispatch}
     />
 
-    // const componentForPropsMain = () => <ProfileContainer
-    //     stateForMainPosts={props.AppState.mainPage.stateForMainPosts}
-    //     stateForNewPost={props.AppState.mainPage.newPosts}
-    //     dispatch={props.dispatch}
-    // />
 
     return (
         <div className="App__item">
@@ -46,6 +40,7 @@ function App(props: AppPropsType) {
                 <Route path="/music" render={() => <Music/>}/>
                 <Route path="/settings" render={() => <Settings/>}/>
                 <Route path="/people" render={() => <People/>}/>
+                <Route path="/login" render={() => <Login/>}/>
             </div>
             <Footer/>
         </div>

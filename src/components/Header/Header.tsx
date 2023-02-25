@@ -11,9 +11,9 @@ const Header: React.FC<PropsType> = ({isFetching, login}) => {
     return (
         <header className={classes.header}>
             <div>
-                {!isFetching
+                {!isFetching && login !== null
                     ? <span style={{color: 'white', marginLeft: '10px'}}>{'Welcome ' + login}</span>
-                    : <NavLink to={''}>Login</NavLink>
+                    : <NavLink to={'/login'}>Login</NavLink>
                 }
             </div>
             <img className={classes.headerLogo}/>

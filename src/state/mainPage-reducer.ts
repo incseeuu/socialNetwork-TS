@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {profileApi} from "../api/api";
 
 export type MainPageType = {
     stateForMainPosts: PostsStateType[]
@@ -43,7 +45,7 @@ export type MainPageACType = AddPostACType | UpdateNewPostTextACType | SetProfil
 
 export type AddPostACType = ReturnType<typeof addPostAC>
 export type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
-export type SetProfileAC = ReturnType<typeof setProfileAC>
+export type SetProfileAC = ReturnType<typeof setProfile>
 export type IsLoadingAC = ReturnType<typeof setLoadingAC>
 
 let initialState: MainPageType = {
@@ -86,7 +88,7 @@ export const updateNewPostTextAC = (text: string) => {
     } as const
 }
 
-export const setProfileAC = (profile: GetProfileType) => {
+export const setProfile = (profile: GetProfileType) => {
     return {
         type: 'SET-PROFILE',
         payload: {
@@ -102,6 +104,13 @@ export const setLoadingAC = (value: boolean) => {
             value
         }
     } as const
+}
+
+export const userFromUrlThunk = (getUserIdFromUrl: number) => (dispatch: Dispatch) => {
+    profileApi.getUserFromUrl(getUserIdFromUrl)
+        .then(res => {
+            dispatch(setProfile(res.data))
+        })
 }
 
 export default mainPageReducer;

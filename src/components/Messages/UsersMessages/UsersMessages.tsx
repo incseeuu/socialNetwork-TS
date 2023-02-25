@@ -4,15 +4,18 @@ import {MessagesStateType} from "../../../state/store";
 import FriendMessageItem from "./MessagesItem/FriendMessageItem/FriendMessageItem";
 import {SelfMessageItem} from './MessagesItem/SelfMessageItem/SelfMessageItem';
 import {MessagesPageType} from "../../../state/messagesPage-reducer";
+import {Redirect} from "react-router-dom";
 
 
 type UsersMessagesType = {
     stateForUsersMessages: MessagesPageType
     updateNewMessageCallBack: (value: string) => void
     sendMessage: () => void
+    isAuth: boolean
 }
 
 const UsersMessages = (props: UsersMessagesType) => {
+
 
     const messagesSendRef = React.createRef<HTMLTextAreaElement>()
 
@@ -35,8 +38,8 @@ const UsersMessages = (props: UsersMessagesType) => {
             )
         })
 
-    return (
-        <div className={classes.messagesList}>
+    return ( props.isAuth ? <Redirect to={'/login'}/>
+            : <div className={classes.messagesList}>
             <div className={classes.chatContainer}>
                 <FriendMessageItem/>
                 {mappingStateDialogsMessages}
