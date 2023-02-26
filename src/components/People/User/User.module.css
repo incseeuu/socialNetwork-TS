@@ -1,8 +1,145 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+
+
+.users {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 40px;
+    grid-row-gap: 50px;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px #1d2738;
+    transition: 0.5s ease-in-out;
+}
+.user:hover {
+    box-shadow: 10px 5px 5px darkred;
+    background: #1d2738;
+}
+
 .avatar {
-    width: 150px;
+    background: white;
+    border-radius: 50%;
+    width: 100px;
     height: 100px;
 }
 
+.linkUser {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: black;
+}
+
+.name {
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.5s ease-in-out;
+}
+
+.user:hover .name{
+    color: white;
+}
+
+.status {
+    opacity: 0.5;
+    transition: 0.5s ease-in-out;
+}
+
+.user:hover .status{
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+.follow {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    position: absolute;
+    z-index: 2;
+    width: 100px;
+    height: 30px;
+    color: white;
+    background: #1d2738;
+    box-shadow: 0 0 5px 2px darkred;
+    border-radius: 5px;
+    border: none;
+    transition: 0.5s ease-in-out;
+}
+
+.btn:hover {
+    background: darkred;
+    cursor: pointer;
+    box-shadow: 0 0 5px 5px white;
+}
+
+.btn:active {
+    background: #4b0101;
+}
+
+.pagination {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 70px;
+}
+
+.page {
+    text-align: center;
+    background-color: #1d2738;
+    color: white;
+    width: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 2px darkred;
+}
+
+.page:hover {
+    cursor: pointer;
+}
+
 .currentPage{
+    color: #1d2738;
+    background: white;
     font-weight: bold;
 }
+
+.pagBtn {
+    text-align: center;
+    background-color: #1d2738;
+    color: white;
+    width: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 2px darkred;
+}
+
+.pagBtn:hover {
+    cursor: pointer;
+}
+

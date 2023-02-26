@@ -38,15 +38,15 @@ const UsersMessages = (props: UsersMessagesType) => {
             )
         })
 
-    return ( props.isAuth ? <Redirect to={'/login'}/>
+    return (props.isAuth ? <Redirect to={'/login'}/>
             : <div className={classes.messagesList}>
-            <div className={classes.chatContainer}>
-                <FriendMessageItem/>
-                {mappingStateDialogsMessages}
-                <FriendMessageItem/>
-            </div>
+                <div className={classes.chatContainer}>
+                    <FriendMessageItem/>
+                    {mappingStateDialogsMessages}
+                    <FriendMessageItem/>
+                </div>
 
-            <div className={classes.sendForm}>
+                <div className={classes.sendForm}>
                 <textarea
                     value={props.stateForUsersMessages.newMessage}
                     onChange={onChangeUpdateNewMessage}
@@ -54,9 +54,9 @@ const UsersMessages = (props: UsersMessagesType) => {
                     placeholder={'Write message...'}
                     ref={messagesSendRef}
                 />
-                <button className={classes.sendBtn} onClick={onClickSendHandler}>Send</button>
+                    <button className={classes.sendBtn} onClick={onClickSendHandler}>Send</button>
+                </div>
             </div>
-        </div>
     );
 };
 

@@ -1,9 +1,10 @@
 .nav {
     grid-area: navbar;
-    height: 508px;
     background-color: #1d2738;
     border-radius: 10px;
     box-shadow: 10px 5px 5px darkred;
+    width: 15em;
+    height: 36em;
 }
 
 .menuItems {

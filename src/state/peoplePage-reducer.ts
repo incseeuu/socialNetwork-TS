@@ -30,7 +30,6 @@ export type PeopleStateType = {
 export type GetUsersType = {
     name: string
     id: number
-    uniqueUrlName: null | string
     photos: PhotosUsersType
     status: string | null
     followed: boolean
@@ -44,7 +43,7 @@ type PhotosUsersType = {
 const initialState: PeopleStateType = {
     items: [],
     totalCount: 0,
-    pageSize: 5,
+    pageSize: 6,
     currentPage: 1,
     isFetching: true,
     isDisabledFollowBtn: []

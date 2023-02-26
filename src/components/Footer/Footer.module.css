@@ -1,3 +1,12 @@
-.footer {
-    color: blueviolet;
+footer {
+    grid-area: footer;
+    width: 95%;
+    height: 8%;
+    background-color: #1d2738;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px darkred;
+    position: fixed;
+    bottom: 2%;
+    color: white;
+    text-align: center;
 }

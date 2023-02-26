@@ -3,9 +3,9 @@ import classes from "./Footer.module.css";
 
 const Footer = () => {
     return (
-        <div>
-            <footer className={classes.footer}>Footer</footer>
-        </div>
+        <footer>
+            <div className={classes.footer}>Footer</div>
+        </footer>
     );
 };
 
