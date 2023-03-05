@@ -17,6 +17,7 @@ type PropsType = {
     currentPage: number
     totalCount: number
     isFetching: boolean
+    isAuth: boolean
     isDisabledFollowBtn: number[] | []
     setUsersAC: (items: GetUsersType[]) => void
     setCurrentPageAC: (page: number) => void
@@ -57,6 +58,7 @@ class UsersAPIComponent extends React.Component<PropsType> {
                 isDisabledFollowBtn={this.props.isDisabledFollowBtn}
                 followThunkCreator={this.props.followThunkCreator}
                 unFollowThunkCreator={this.props.unFollowThunkCreator}
+                isAuth={this.props.isAuth}
             />
 
     }
@@ -69,11 +71,12 @@ type mapStateToPropsType = {
     totalCount: number
     isFetching: boolean
     isDisabledFollowBtn: number[] | []
+    isAuth: boolean
 }
 
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-    const {peoplePage} = state
+    const {peoplePage, auth} = state
     const {items, pageSize, currentPage, totalCount, isFetching, isDisabledFollowBtn} = peoplePage
     return {
         stateForUser: items,
@@ -81,7 +84,8 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         currentPage,
         totalCount,
         isFetching,
-        isDisabledFollowBtn
+        isDisabledFollowBtn,
+        isAuth: auth.isFetching
     }
 }
 

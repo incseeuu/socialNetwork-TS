@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './User.module.css'
 import {GetUsersType} from "../../../state/peoplePage-reducer";
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 type PropsType = {
     state: GetUsersType[]
@@ -12,6 +12,7 @@ type PropsType = {
     isDisabledFollowBtn: number[] | []
     followThunkCreator: (userId: number) => void
     unFollowThunkCreator: (userId: number) => void
+    isAuth: boolean
 }
 
 const User: React.FC<PropsType> = (props: PropsType) => {
@@ -82,7 +83,7 @@ const User: React.FC<PropsType> = (props: PropsType) => {
         pages.push(i)
     }
 
-    return (
+    return ( !props.isAuth ? <Redirect to={'/login'} /> :
         <div className={classes.container}>
 
             <div className={classes.users}>

@@ -5,6 +5,7 @@ import navbarPageReducer from "./navbarPage-reducer";
 import peoplePageReducer from "./peoplePage-reducer";
 import {authReducer} from "./auth-reducer";
 import thunkMiddleware from "redux-thunk";
+import {reducer as formReducer} from "redux-form";
 
 
 export type AppStateType = ReturnType<typeof rootReducer>
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     messagePage: messagesPageReducer,
     navbarPage: navbarPageReducer,
     peoplePage: peoplePageReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))

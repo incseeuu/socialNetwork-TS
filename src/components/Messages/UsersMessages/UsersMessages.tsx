@@ -38,7 +38,7 @@ const UsersMessages = (props: UsersMessagesType) => {
             )
         })
 
-    return (props.isAuth ? <Redirect to={'/login'}/>
+    return (!props.isAuth ? <Redirect to={'/login'}/>
             : <div className={classes.messagesList}>
                 <div className={classes.chatContainer}>
                     <FriendMessageItem/>

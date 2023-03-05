@@ -22,13 +22,19 @@ export const userApi = {
 }
 
 export const headerApi = {
-    authMe: () => {
+    authMe(){
         return instance.get('auth/me')
     }
 }
 
 export  const profileApi = {
-    getUserFromUrl: (getUserIdFromUrl: number) => {
+    getUserFromUrl(getUserIdFromUrl: number){
         return instance.get(`profile/${getUserIdFromUrl}`)
+    },
+    getStatus(userId: number){
+        return instance.get(`/profile/status/${userId}`)
+    },
+    changeStatus(value: string){
+        return instance.put('/profile/status', {value})
     }
 }

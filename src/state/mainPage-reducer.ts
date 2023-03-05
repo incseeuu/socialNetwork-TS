@@ -6,6 +6,7 @@ export type MainPageType = {
     stateForMainPosts: PostsStateType[]
     newPosts: string
     stateForProfile: GetProfileType
+    status: string
     isLoading: boolean
 }
 
@@ -41,12 +42,17 @@ export type PostsStateType = {
     likeCount: number
 }
 
-export type MainPageACType = AddPostACType | UpdateNewPostTextACType | SetProfileAC | IsLoadingAC
+export type MainPageACType = AddPostACType
+    | UpdateNewPostTextACType
+    | SetProfileAC
+    | IsLoadingAC
+    | ChangeStatusAC
 
 export type AddPostACType = ReturnType<typeof addPostAC>
 export type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
 export type SetProfileAC = ReturnType<typeof setProfile>
 export type IsLoadingAC = ReturnType<typeof setLoadingAC>
+export type ChangeStatusAC = ReturnType<typeof changeStatusAC>
 
 let initialState: MainPageType = {
     stateForMainPosts: [
@@ -55,6 +61,7 @@ let initialState: MainPageType = {
     ],
     newPosts: '',
     stateForProfile: {} as GetProfileType,
+    status: '',
     isLoading: false
 }
 
@@ -67,9 +74,11 @@ const mainPageReducer = (state = initialState, action: MainPageACType): MainPage
         case 'NEW-POST-TEXT':
             return {...state, newPosts: action.payload.text}
         case "SET-PROFILE":
-            return  {...state, stateForProfile: action.payload.profile}
+            return {...state, stateForProfile: action.payload.profile}
         case "IS-LOADING":
             return {...state, isLoading: action.payload.value}
+        case "CHANGE-STATUS":
+            return {...state, status: action.payload.value}
     }
 
     return state
@@ -106,10 +115,37 @@ export const setLoadingAC = (value: boolean) => {
     } as const
 }
 
+export const changeStatusAC = (value: string) => {
+    return {
+        type: "CHANGE-STATUS",
+        payload: {
+            value
+        }
+    } as const
+}
+
 export const userFromUrlThunk = (getUserIdFromUrl: number) => (dispatch: Dispatch) => {
     profileApi.getUserFromUrl(getUserIdFromUrl)
         .then(res => {
             dispatch(setProfile(res.data))
+        })
+}
+
+
+export const getStatusThunk = (userId: number) => (dispatch: Dispatch) => {
+    profileApi.getStatus(userId)
+        .then(res => {
+            dispatch(changeStatusAC(res.data))
+        })
+}
+
+export const changeStatusThunk = (value: string) => (dispatch: Dispatch) => {
+    console.log(1)
+    profileApi.changeStatus(value)
+        .then(res => {
+            if(res.data.resultCode === 0){
+                dispatch(changeStatusAC(value))
+            }
         })
 }
 

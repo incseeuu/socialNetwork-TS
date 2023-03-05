@@ -2,9 +2,15 @@ import React from 'react';
 import classes from "./Profile.module.css";
 import {GetProfileType} from "../../../state/mainPage-reducer";
 import Loader from "../../common/PreLoader/Loader";
+import {Redirect} from "react-router-dom";
+import Status from "./Status/Status";
 
 type PropsType = {
     stateForProfile: GetProfileType
+    isAuth: boolean
+    changeStatusAC: (value: string) => void
+    changeStatusCallBack: (value: string) => void
+    status: string
 }
 
 const Profile = (props: PropsType) => {
@@ -13,7 +19,8 @@ const Profile = (props: PropsType) => {
     }
 
 
-    return (<div className={classes.avatarAndDescription}>
+    return ( !props.isAuth ? <Redirect to={'/login'} /> :
+        <div className={classes.avatarAndDescription}>
             <div>
                 <img className={classes.avatarImg}
                      src={props.stateForProfile.photos.small
@@ -29,9 +36,8 @@ const Profile = (props: PropsType) => {
                 </div>
                 <div className={classes.description}>{props.stateForProfile.aboutMe}</div>
                 <div className={classes.jobDescription}>{props.stateForProfile.lookingForAJobDescription}</div>
-
-
             </div>
+            <Status status={props.status} changeStatusAC={props.changeStatusAC} changeStatusCallBack={props.changeStatusCallBack}/>
             <div className={classes.social}>
             </div>
         </div>

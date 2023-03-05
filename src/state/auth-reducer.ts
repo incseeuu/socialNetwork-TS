@@ -50,13 +50,14 @@ export const setFetching = (value: boolean) => {
 }
 
 export const authMeThunk = (dispatch: Dispatch) => {
-    dispatch(setFetching(true))
+    dispatch(setFetching(false))
 
 
     headerApi.authMe().then(res => {
         if (res.data.resultCode === 0){
             dispatch(setAuthState(res.data.data))
+            dispatch(setFetching(true))
         }
-        dispatch(setFetching(false))
+
     })
 }
