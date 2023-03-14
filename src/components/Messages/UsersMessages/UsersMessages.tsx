@@ -5,28 +5,19 @@ import FriendMessageItem from "./MessagesItem/FriendMessageItem/FriendMessageIte
 import {SelfMessageItem} from './MessagesItem/SelfMessageItem/SelfMessageItem';
 import {MessagesPageType} from "../../../state/messagesPage-reducer";
 import {Redirect} from "react-router-dom";
+import {FormSendMessage, TextFormRedux} from "../../common/TextForm/TextForm";
 
 
 type UsersMessagesType = {
     stateForUsersMessages: MessagesPageType
-    updateNewMessageCallBack: (value: string) => void
-    sendMessage: () => void
+    sendMessage: (value: string) => void
     isAuth: boolean
 }
 
 const UsersMessages = (props: UsersMessagesType) => {
 
-
-    const messagesSendRef = React.createRef<HTMLTextAreaElement>()
-
-    const onClickSendHandler = () => {
-        props.sendMessage()
-    }
-
-    const onChangeUpdateNewMessage = () => {
-        if (messagesSendRef.current) {
-            props.updateNewMessageCallBack(messagesSendRef.current.value)
-        }
+    const onSubmit = (formData: FormSendMessage) => {
+        props.sendMessage(formData.message)
     }
 
     const mappingStateDialogsMessages =
@@ -46,16 +37,7 @@ const UsersMessages = (props: UsersMessagesType) => {
                     <FriendMessageItem/>
                 </div>
 
-                <div className={classes.sendForm}>
-                <textarea
-                    value={props.stateForUsersMessages.newMessage}
-                    onChange={onChangeUpdateNewMessage}
-                    className={classes.textarea}
-                    placeholder={'Write message...'}
-                    ref={messagesSendRef}
-                />
-                    <button className={classes.sendBtn} onClick={onClickSendHandler}>Send</button>
-                </div>
+                <TextFormRedux onSubmit={onSubmit}/>
             </div>
     );
 };

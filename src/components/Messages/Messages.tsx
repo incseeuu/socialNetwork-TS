@@ -8,7 +8,7 @@ import UsersMessagesContainer from "./UsersMessages/UsersMessagesContainer";
 type MessagesType = {
     stateForMessages: MessagesStateType[]
     stateForDialogs: DialogStateType[]
-    newMessage: string
+    // newMessage: string
     dispatch: (action: ActionsType) => void
 
 }

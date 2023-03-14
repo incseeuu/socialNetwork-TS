@@ -3,8 +3,7 @@ import React from 'react';
 import UsersMessages from "./UsersMessages";
 import {
     addMessageActionCreator,
-    MessagesPageType,
-    updateMessageTextActionCreator
+    MessagesPageType
 } from "../../../state/messagesPage-reducer";
 
 import {connect} from "react-redux";
@@ -17,8 +16,7 @@ type mapStateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-    updateNewMessageCallBack: (value: string) => void,
-    sendMessage: () => void
+    sendMessage: (value: string) => void
 }
 
 
@@ -31,8 +29,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        updateNewMessageCallBack: (value: string) => dispatch(updateMessageTextActionCreator(value)),
-        sendMessage: () => dispatch(addMessageActionCreator()),
+        sendMessage: (value: string) => dispatch(addMessageActionCreator(value)),
     }
 }
 

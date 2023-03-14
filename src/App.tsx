@@ -24,7 +24,7 @@ function App(props: AppPropsType) {
     const componentForPropsMessages = () => <Messages
         stateForMessages={props.AppState.messagePage.stateMessages}
         stateForDialogs={props.AppState.messagePage.stateDialogs}
-        newMessage={props.AppState.messagePage.newMessage}
+        // newMessage={props.AppState.messagePage.newMessage}
         dispatch={props.dispatch}
     />
 

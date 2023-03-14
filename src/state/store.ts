@@ -1,6 +1,6 @@
 import {v1} from "uuid";
-import mainPageReducer, {AddPostACType, UpdateNewPostTextACType} from "./mainPage-reducer";
-import messagesPageReducer, {AddMessageACType, UpdateMessageTextACType} from "./messagesPage-reducer";
+import mainPageReducer, {AddPostACType} from "./mainPage-reducer";
+import messagesPageReducer, {AddMessageACType} from "./messagesPage-reducer";
 import navbarPageReducer from "./navbarPage-reducer";
 
 export type PostsStateType = {
@@ -57,9 +57,7 @@ export type  StoreType = {
 }
 
 export type ActionsType = AddPostACType
-    | UpdateNewPostTextACType
     | AddMessageACType
-    | UpdateMessageTextACType
 
 
 export const store: StoreType = {

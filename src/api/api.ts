@@ -13,28 +13,40 @@ export const userApi = {
     getUser(currentPage: number, pageSize: number) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(res => res.data)
     },
-    unFollow(userId: number){
+    unFollow(userId: number) {
         return instance.delete(`follow/${userId}`)
     },
-    follow(userId: number){
+    follow(userId: number) {
         return instance.post(`follow/${userId}`)
     }
 }
 
 export const headerApi = {
-    authMe(){
+    authMe() {
         return instance.get('auth/me')
     }
 }
 
-export  const profileApi = {
-    getUserFromUrl(getUserIdFromUrl: number){
+export const profileApi = {
+    getUserFromUrl(getUserIdFromUrl: number) {
         return instance.get(`profile/${getUserIdFromUrl}`)
     },
-    getStatus(userId: number){
-        return instance.get(`/profile/status/${userId}`)
+    getStatus(userId: number) {
+        return instance.get(`profile/status/${userId}`)
     },
-    changeStatus(value: string){
-        return instance.put('/profile/status', {value})
+    changeStatus(value: string) {
+        return instance.put('profile/status', {value})
+    }
+}
+
+export const authApi = {
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post('auth/login', {email, password, rememberMe})
+    },
+    logout(){
+        return instance.delete('auth/login')
+    },
+    getCaptcha(){
+        return instance.get('/security/get-captcha-url')
     }
 }

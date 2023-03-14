@@ -4,7 +4,6 @@ import {profileApi} from "../api/api";
 
 export type MainPageType = {
     stateForMainPosts: PostsStateType[]
-    newPosts: string
     stateForProfile: GetProfileType
     status: string
     isLoading: boolean
@@ -43,13 +42,11 @@ export type PostsStateType = {
 }
 
 export type MainPageACType = AddPostACType
-    | UpdateNewPostTextACType
     | SetProfileAC
     | IsLoadingAC
     | ChangeStatusAC
 
 export type AddPostACType = ReturnType<typeof addPostAC>
-export type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
 export type SetProfileAC = ReturnType<typeof setProfile>
 export type IsLoadingAC = ReturnType<typeof setLoadingAC>
 export type ChangeStatusAC = ReturnType<typeof changeStatusAC>
@@ -59,7 +56,6 @@ let initialState: MainPageType = {
         {id: v1(), message: "Hello, how are you", likeCount: 15},
         {id: v1(), message: "Hello, I am fine", likeCount: 20},
     ],
-    newPosts: '',
     stateForProfile: {} as GetProfileType,
     status: '',
     isLoading: false
@@ -68,11 +64,8 @@ let initialState: MainPageType = {
 const mainPageReducer = (state = initialState, action: MainPageACType): MainPageType => {
     switch (action.type) {
         case 'ADD-POST':
-            let newPost: PostsStateType = {id: v1(), message: state.newPosts, likeCount: 0}
-            return {...state, stateForMainPosts: [...state.stateForMainPosts, newPost], newPosts: ''}
-
-        case 'NEW-POST-TEXT':
-            return {...state, newPosts: action.payload.text}
+            let newPost: PostsStateType = {id: v1(), message: action.value, likeCount: 0}
+            return {...state, stateForMainPosts: [...state.stateForMainPosts, newPost]}
         case "SET-PROFILE":
             return {...state, stateForProfile: action.payload.profile}
         case "IS-LOADING":
@@ -84,17 +77,8 @@ const mainPageReducer = (state = initialState, action: MainPageACType): MainPage
     return state
 }
 
-export const addPostAC = () => {
-    return {type: "ADD-POST"} as const
-}
-
-export const updateNewPostTextAC = (text: string) => {
-    return {
-        type: "NEW-POST-TEXT",
-        payload: {
-            text
-        }
-    } as const
+export const addPostAC = (value: string) => {
+    return {type: 'ADD-POST', value} as const
 }
 
 export const setProfile = (profile: GetProfileType) => {

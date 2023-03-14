@@ -15,3 +15,7 @@
 .checkbox {
     display: flex;
 }
+
+.error {
+    color: red;
+}

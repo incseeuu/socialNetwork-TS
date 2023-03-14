@@ -15,10 +15,11 @@ import {compose} from "redux";
 type WithRouterTypeProps = RouteComponentProps<ParamType> & PropsType & MapStateToProps
 
 type PropsType = {
-    userFromUrlThunk: (getUserIdFromUrl: number) => void
+    userFromUrlThunk: (getUserIdFromUrl: number | null) => void
     changeStatusThunk: (value: string) => void
-    getStatusThunk: (userId: number) => void
+    getStatusThunk: (userId: number | null) => void
     changeStatusAC: (value: string) => void
+    authorizedId: number | null
 }
 
 type ParamType = {
@@ -27,13 +28,13 @@ type ParamType = {
 
 class ProfileContainer extends React.Component<WithRouterTypeProps> {
     componentDidMount() {
-        let getUserIdFromUrl = +this.props.match.params.userId
+        let getUserIdFromUrl: number | null = +this.props.match.params.userId
         if (!getUserIdFromUrl) {
-            getUserIdFromUrl = 27956
+            getUserIdFromUrl = this.props.authorizedId
         }
         this.props.userFromUrlThunk(getUserIdFromUrl)
 
-        this.props.getStatusThunk(27956)
+        this.props.getStatusThunk(this.props.authorizedId)
     }
 
     changeStatusCallBack(value: string){
@@ -41,15 +42,15 @@ class ProfileContainer extends React.Component<WithRouterTypeProps> {
     }
 
     render() {
-        // return <Profile stateForProfile={this.props.stateForProfile} isAuth={this.props.isAuth} {...this.props}/>
         return <Profile changeStatusCallBack={(v)=>this.changeStatusCallBack(v)}  {...this.props}/>
     }
 }
 
 type MapStateToProps = {
     stateForProfile: GetProfileType
-    isAuth: boolean,
+    isAuth: boolean
     status: string
+    authorizedId: number | null
 }
 
 
@@ -59,16 +60,12 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
         stateForProfile,
         status: mainPage.status,
-        isAuth: auth.isFetching
+        isAuth: auth.isFetching,
+        authorizedId: auth.id
+
     }
 }
 
-
-// let WithUrlContainerComponent = withRouter(ProfileC)
-//
-// const ProfileContainer = connect(mapStateToProps, {userFromUrlThunk})(WithUrlContainerComponent)
-//
-// export default ProfileContainer;
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {userFromUrlThunk, changeStatusThunk, getStatusThunk, changeStatusAC}),
     withRouter

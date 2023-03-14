@@ -39,3 +39,14 @@
     letter-spacing: 1px;
     color: #1d2738;
 }
+
+.authBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.logout {
+    color: white;
+    margin-left: 10px;
+    cursor: pointer;
+}

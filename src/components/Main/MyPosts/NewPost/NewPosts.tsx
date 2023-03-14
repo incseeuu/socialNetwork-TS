@@ -1,24 +1,18 @@
 import React from 'react';
 import {MainPageType} from "../../../../state/mainPage-reducer";
+import {PostFormData, PostFormRedux} from "../../../common/PostForm/PostForm";
 
 
 type NewPostsPropsType = {
     stateForNewPost: MainPageType
-    changeNewPostsText: (value: string) => void
-    addNewPost: () => void
+    addNewPost: (value: string) => void
 }
 
 const NewPosts = (props: NewPostsPropsType) => {
 
-    const postsAddRef = React.createRef<HTMLTextAreaElement>()
 
-    const onClickSendHandler = () => {
-            props.addNewPost()
-
-    }
-
-    const onChangeNewPostsText = () => {
-        postsAddRef.current && props.changeNewPostsText(postsAddRef.current.value)
+    const onSendPost = (formData: PostFormData) => {
+        props.addNewPost(formData.newPost)
     }
 
     const mappingStateAllPosts = props.stateForNewPost.stateForMainPosts.map(el => {
@@ -33,15 +27,7 @@ const NewPosts = (props: NewPostsPropsType) => {
     return (
         <div>
             {mappingStateAllPosts}
-            <div>
-                <textarea
-                    onChange={onChangeNewPostsText}
-                    ref={postsAddRef}
-                    value={props.stateForNewPost.newPosts}/>
-            </div>
-            <div>
-                <button onClick={onClickSendHandler}>Send</button>
-            </div>
+            <PostFormRedux onSubmit={onSendPost}/>
         </div>
     );
 };

@@ -1,16 +1,17 @@
 import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
-import {authMeThunk} from "../../state/auth-reducer";
+import {authMeThunk, logoutThunkCreator} from "../../state/auth-reducer";
 import {AppStateType} from "../../state/redux-store";
 
 
 type PropsType = {
-    id: string | null
+    id: number | null
     email: string | null
     login: string | null
     isFetching: boolean
     authMeThunk: () => void
+    logoutThunkCreator: () => void
 }
 
 class HeaderC extends React.Component<PropsType> {
@@ -20,14 +21,18 @@ class HeaderC extends React.Component<PropsType> {
     }
 
     render() {
-        return <Header isFetching={this.props.isFetching} login={this.props.login}/>;
+        return <Header
+            isFetching={this.props.isFetching}
+            login={this.props.login}
+            logoutThunkCreator={this.props.logoutThunkCreator}
+        />;
     }
 }
 
 export default HeaderC
 
 type MapStateToProps = {
-    id: string | null
+    id: number | null
     email: string | null
     login: string | null
     isFetching: boolean
@@ -35,13 +40,13 @@ type MapStateToProps = {
 
 const mapStateToProps = (state: AppStateType):MapStateToProps => {
 
-    let {id, email,login,isFetching} = state.auth
+    let {id, email,login,isFetching,urlCaptcha} = state.auth
 
     return {
         id,
         email,
         login,
-        isFetching
+        isFetching,
     }
 }
 
@@ -49,5 +54,5 @@ const mapStateToProps = (state: AppStateType):MapStateToProps => {
 
 export const HeaderContainer = connect(
     mapStateToProps,
-    {authMeThunk: () => authMeThunk})(HeaderC)
+    {authMeThunk: () => authMeThunk, logoutThunkCreator})(HeaderC)
 
