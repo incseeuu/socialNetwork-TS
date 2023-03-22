@@ -3,6 +3,7 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {authMeThunk, logoutThunkCreator} from "../../state/auth-reducer";
 import {AppStateType} from "../../state/redux-store";
+import {getUserEmail, getUserId, isFetch, isLogin} from "../../state/users-selector";
 
 
 type PropsType = {
@@ -40,7 +41,11 @@ type MapStateToProps = {
 
 const mapStateToProps = (state: AppStateType):MapStateToProps => {
 
-    let {id, email,login,isFetching,urlCaptcha} = state.auth
+    const id = getUserId(state),
+        email = getUserEmail(state),
+        login = isLogin(state),
+        isFetching = isFetch(state)
+
 
     return {
         id,

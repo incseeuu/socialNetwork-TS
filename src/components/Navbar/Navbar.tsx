@@ -13,7 +13,7 @@ const Navbar = (props: NavbarType) => {
         <nav className={classes.nav}>
             <div className={classes.menuItems}>
                 <div className={`${classes.itemProfile} ${classes.menuItem}`}>
-                    <NavLink to="/main" activeClassName={classes.activeUrl}>Profile</NavLink>
+                    <NavLink to="/main" activeClassName={classes.activeUrl} >Profile</NavLink>
                 </div>
                 <div className={`${classes.itemMessages} ${classes.menuItem}`}>
                     <NavLink to="/messages" activeClassName={classes.activeUrl}>Messages</NavLink>
