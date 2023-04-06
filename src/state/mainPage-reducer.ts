@@ -61,7 +61,7 @@ let initialState: MainPageType = {
     isLoading: false
 }
 
-const mainPageReducer = (state = initialState, action: MainPageACType): MainPageType => {
+export const mainPageReducer = (state = initialState, action: MainPageACType): MainPageType => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost: PostsStateType = {id: v1(), message: action.value, likeCount: 0}

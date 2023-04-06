@@ -37,6 +37,10 @@ class ProfileContainer extends React.Component<WithRouterTypeProps> {
         this.props.getStatusThunk(this.props.authorizedId)
     }
 
+    shouldComponentUpdate(nextProps: Readonly<WithRouterTypeProps>, nextState: Readonly<{}>, nextContext: any): boolean {
+        return nextProps != this.props || nextState != this.state
+    }
+
     changeStatusCallBack(value: string){
         this.props.changeStatusThunk(value)
     }

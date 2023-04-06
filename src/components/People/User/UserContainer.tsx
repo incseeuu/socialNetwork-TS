@@ -27,7 +27,7 @@ type PropsType = {
     unFollowThunkCreator: (userId: number) => void
 }
 
-class UsersAPIComponent extends React.Component<PropsType> {
+class UsersAPIComponent extends React.PureComponent<PropsType> {
     componentDidMount() {
         this.props.getUserThunkCreator(this.props.currentPage, this.props.pageSize)
     }
@@ -45,7 +45,6 @@ class UsersAPIComponent extends React.Component<PropsType> {
 
 
     render() {
-
 
         return this.props.isFetching
             ? <Loader/>
