@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import Main from "./components/Main/Main";
@@ -10,9 +10,13 @@ import Settings from "./components/Settings/Settings";
 import {Route} from "react-router-dom";
 import {ActionsType} from "./state/store";
 import {AppStateType} from "./state/redux-store";
-import People from "./components/People/People";
+// import People from "./components/People/People";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import Loader from "./components/common/PreLoader/Loader";
+import withSuspense from "./hoc/withSuspense";
+import WithSuspense from "./hoc/withSuspense";
+const People = lazy(() => import("./components/People/People"))
 
 type AppPropsType = {
     AppState: AppStateType
@@ -39,7 +43,7 @@ function App(props: AppPropsType) {
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
                 <Route path="/settings" render={() => <Settings/>}/>
-                <Route path="/people" render={() => <People/>}/>
+                <Route path="/people" render={() => <WithSuspense><People/></WithSuspense>}/>
                 <Route path="/login" render={() => <Login/>}/>
             </div>
             <Footer/>
